@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<head>
+    <script src="~/Scripts/jquery-2.1.4.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/main.css" />
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/angular.js"></script>  
+    <script src="~/Scripts/angular-route.js"></script>
+   
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Data Responsive SVG Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+    <script src="~/Scripts/js/Controller.js"></script>
+    <script src="~/Scripts/js/Directive.js"></script>
+   
+</head>
+
+<body ng-app="SvgMapApp">
+
+    <div id="MainDiv" ng-controller="MainCtrl">
+        <div class="container">
+            <div svg-map></div>
+            <p>
+                <button ng-click="createDummyData()" class="btn btn-block btn-default">Create Dummy Data</button>
+            </p>
+            <div class="regionlist">
+                <div ng-repeat="(key,region) in dummyData">
+                    <div>{{key}}</div>
+                    <div>{{region.value | number}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+
+
+</body>

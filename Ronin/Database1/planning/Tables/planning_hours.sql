@@ -1,0 +1,27 @@
+﻿CREATE TABLE [planning].[planning_hours] (
+    [planning_hours_id]          INT      IDENTITY (1, 1) NOT NULL,
+    [occupation_hours_id]        INT      NULL,
+    [call_pool_id]               INT      NULL,
+    [planning_id]                INT      NOT NULL,
+    [contact_id]                 INT      NULL,
+    [contract_formation_id]      INT      NULL,
+    [hour_code_id]               INT      NULL,
+    [planning_hours_status_id]   INT      NULL,
+    [planning_hours_start_time]  DATETIME NOT NULL,
+    [planning_hours_end_time]    DATETIME NOT NULL,
+    [planning_hours_is_replaced] BIT      CONSTRAINT [DF_planning_hours_planning_hours_is_replaced] DEFAULT ((0)) NOT NULL,
+    [replaced_planning_hours_id] INT      NULL,
+    [create_date]                DATETIME NULL,
+    [modify_date]                DATETIME NULL,
+    [delete_date]                DATETIME NULL,
+    CONSTRAINT [PK_planning_hours] PRIMARY KEY CLUSTERED ([planning_hours_id] ASC) WITH (FILLFACTOR = 90),
+    CONSTRAINT [FK_planning_hours_call_pool] FOREIGN KEY ([call_pool_id]) REFERENCES [callpool].[call_pool] ([call_pool_id]),
+    CONSTRAINT [FK_planning_hours_contact] FOREIGN KEY ([contact_id]) REFERENCES [contact].[contact] ([contact_id]),
+    CONSTRAINT [FK_planning_hours_contract_formation] FOREIGN KEY ([contract_formation_id]) REFERENCES [contract].[contract_formation] ([contract_formation_id]),
+    CONSTRAINT [FK_planning_hours_hour_code] FOREIGN KEY ([hour_code_id]) REFERENCES [planning].[hour_code] ([hour_code_id]),
+    CONSTRAINT [FK_planning_hours_occupation_hours] FOREIGN KEY ([occupation_hours_id]) REFERENCES [occupancygrid].[occupation_hours] ([occupation_hours_id]),
+    CONSTRAINT [FK_planning_hours_planning] FOREIGN KEY ([planning_id]) REFERENCES [planning].[planning] ([planning_id]),
+    CONSTRAINT [FK_planning_hours_planning_hours] FOREIGN KEY ([replaced_planning_hours_id]) REFERENCES [planning].[planning_hours] ([planning_hours_id]),
+    CONSTRAINT [FK_planning_hours_planning_hours_status_id] FOREIGN KEY ([planning_hours_status_id]) REFERENCES [planning].[planning_hours_status] ([planning_hours_status_id])
+);
+

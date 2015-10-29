@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OSMModelStoreContainer" CdmEntityContainer="OSMEntities2">
+    <EntitySetMapping Name="Achievements">
+      <EntityTypeMapping TypeName="OSMModel.Achievement">
+        <MappingFragment StoreEntitySet="Achievements">
+          <ScalarProperty Name="Achievement_ID" ColumnName="Achievement_ID" />
+          <ScalarProperty Name="Naam" ColumnName="Naam" />
+          <ScalarProperty Name="Logo" ColumnName="Logo" />
+          <ScalarProperty Name="Instructie" ColumnName="Instructie" />
+          <ScalarProperty Name="Beloning" ColumnName="Beloning" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Achievements_Manager">
+      <EntityTypeMapping TypeName="OSMModel.Achievements_Manager">
+        <MappingFragment StoreEntitySet="Achievements_Manager">
+          <ScalarProperty Name="ManagerManager_ID" ColumnName="ManagerManager_ID" />
+          <ScalarProperty Name="AchievementsAchievements_ID" ColumnName="AchievementsAchievements_ID" />
+          <ScalarProperty Name="Voortgang" ColumnName="Voortgang" />
+          <ScalarProperty Name="Behaald" ColumnName="Behaald" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Clubs">
+      <EntityTypeMapping TypeName="OSMModel.Club">
+        <MappingFragment StoreEntitySet="Club">
+          <ScalarProperty Name="Club_ID" ColumnName="Club_ID" />
+          <ScalarProperty Name="Naam" ColumnName="Naam" />
+          <ScalarProperty Name="Logo" ColumnName="Logo" />
+          <ScalarProperty Name="Doelstelling" ColumnName="Doelstelling" />
+          <ScalarProperty Name="LandLand_Code" ColumnName="LandLand_Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Competities">
+      <EntityTypeMapping TypeName="OSMModel.Competitie">
+        <MappingFragment StoreEntitySet="Competitie">
+          <ScalarProperty Name="Competitie_ID" ColumnName="Competitie_ID" />
+          <ScalarProperty Name="Naam" ColumnName="Naam" />
+          <ScalarProperty Name="LandLand_Code" ColumnName="LandLand_Code" />
+          <ScalarProperty Name="ManagerManagerID" ColumnName="ManagerManagerID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Competitie_Club">
+      <EntityTypeMapping TypeName="OSMModel.Competitie_Club">
+        <MappingFragment StoreEntitySet="Competitie_Club">
+          <ScalarProperty Name="Competitie_Club_ID" ColumnName="Competitie_Club_ID" />
+          <ScalarProperty Name="ClubClub_ID" ColumnName="ClubClub_ID" />
+          <ScalarProperty Name="CompetitieCompetitie_ID" ColumnName="CompetitieCompetitie_ID" />
+          <ScalarProperty Name="Positie" ColumnName="Positie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Lands">
+      <EntityTypeMapping TypeName="OSMModel.Land">
+        <MappingFragment StoreEntitySet="Land">
+          <ScalarProperty Name="Land_Code" ColumnName="Land_Code" />
+          <ScalarProperty Name="Naam" ColumnName="Naam" />
+          <ScalarProperty Name="Continent" ColumnName="Continent" />
+          <ScalarProperty Name="Vlag" ColumnName="Vlag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Managers">
+      <EntityTypeMapping TypeName="OSMModel.Manager">
+        <MappingFragment StoreEntitySet="Manager">
+          <ScalarProperty Name="Manager_ID" ColumnName="Manager_ID" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email_adres" ColumnName="Email_adres" />
+          <ScalarProperty Name="Geslacht" ColumnName="Geslacht" />
+          <ScalarProperty Name="Premium_dagen" ColumnName="Premium_dagen" />
+          <ScalarProperty Name="Ingeschreven" ColumnName="Ingeschreven" />
+          <ScalarProperty Name="Laatst_Ingelogd" ColumnName="Laatst_Ingelogd" />
+          <ScalarProperty Name="Platform" ColumnName="Platform" />
+          <ScalarProperty Name="Site_Logins" ColumnName="Site_Logins" />
+          <ScalarProperty Name="Profiel_Bezoekers" ColumnName="Profiel_Bezoekers" />
+          <ScalarProperty Name="LandLand_Code" ColumnName="LandLand_Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Manager_Competitie">
+      <EntityTypeMapping TypeName="OSMModel.Manager_Competitie">
+        <MappingFragment StoreEntitySet="Manager_Competitie">
+          <ScalarProperty Name="ManagerPunten" ColumnName="ManagerPunten" />
+          <ScalarProperty Name="Manager_Competitie_ID" ColumnName="Manager_Competitie_ID" />
+          <ScalarProperty Name="CompetitieCompetitie_ID" ColumnName="CompetitieCompetitie_ID" />
+          <ScalarProperty Name="ClubClub_ID" ColumnName="ClubClub_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Wedstrijds">
+      <EntityTypeMapping TypeName="OSMModel.Wedstrijd">
+        <MappingFragment StoreEntitySet="Wedstrijd">
+          <ScalarProperty Name="Wedstrijd_ID" ColumnName="Wedstrijd_ID" />
+          <ScalarProperty Name="ThuisClub_ID" ColumnName="ThuisClub_ID" />
+          <ScalarProperty Name="UitClub_ID" ColumnName="UitClub_ID" />
+          <ScalarProperty Name="CompetitieCompetitie_ID" ColumnName="CompetitieCompetitie_ID" />
+          <ScalarProperty Name="Thuis_Score" ColumnName="Thuis_Score" />
+          <ScalarProperty Name="Uit_Score" ColumnName="Uit_Score" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

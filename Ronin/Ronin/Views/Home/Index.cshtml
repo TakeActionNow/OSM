@@ -18,7 +18,8 @@
 
 
     <script src="~/Scripts/js/Controller.js"></script>
-    <script src="~/Scripts/js/Directive.js"></script>
+    <script src="~/Scripts/js/Directive.js"></script
+    <script src="~/Scripts/js/Filter.js"></script>
    
 </head>
 
@@ -35,11 +36,46 @@
                     <div>{{key}}</div>
                     <div>{{region.value | number}}</div>
                 </div>
+
+                <div ng-view>
+                </div>
             </div>
         </div>
+
+
+
+
+
+
+
+        @*<div class="container">
+            <div svg-map></div>
+    
+            <button ng-click="createDummyData()" class="btn btn-block btn-default">Create Dummy Data</button>
+
+            <div class="regionlist">
+                <div ng-repeat="(key,region) in dummyData">
+                    <div>{{key}}</div>
+                    <div>{{region.value | number}}</div>
+                </div>
+            </div>
+
+            <ul>
+                <li><a href="/#/Canada"> Canada </a></li>
+                <li><a href="/#/United States"> United States </a></li>
+                <li><a href="/#/Netherlands"> Netherlands </a></li>
+            </ul>
+
+            <div ng-view>
+            </div>
+
+        </div>*@
     </div>
+</body>
+
+
+<script>
 
   
 
-
-</body>
+</script>

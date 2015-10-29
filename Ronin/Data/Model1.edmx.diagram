@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="246c1adceac144168eb8bdc0a6bafb56" Name="Diagram1">
+        <EntityTypeShape EntityType="OSMModel.Achievement" Width="1.5" PointX="3" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OSMModel.Achievements_Manager" Width="1.5" PointX="5.25" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OSMModel.Club" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OSMModel.Competitie" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OSMModel.Competitie_Club" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="OSMModel.Land" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OSMModel.Manager" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OSMModel.Manager_Competitie" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OSMModel.Wedstrijd" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
+        <AssociationConnector Association="OSMModel.fk_AchievementsAchievements_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="OSMModel.fk_ManagerFKInAchievements_Manager" ManuallyRouted="false" />
+        <AssociationConnector Association="OSMModel.FK__Competiti__Posit__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="OSMModel.fk_LandCode" ManuallyRouted="false" />
+        <AssociationConnector Association="OSMModel.FK__Competiti__Compe__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="OSMModel.fk_CompetitieFKInWedstrijd" ManuallyRouted="false" />
+        <AssociationConnector Association="OSMModel.fk_LandCodeInCompetitie" ManuallyRouted="false" />
+        <AssociationConnector Association="OSMModel.FK__Manager__LandLan__4BAC3F29" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

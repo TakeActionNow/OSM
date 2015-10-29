@@ -1,0 +1,626 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="OSMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Achievements">
+          <Key>
+            <PropertyRef Name="Achievement_ID" />
+          </Key>
+          <Property Name="Achievement_ID" Type="int" Nullable="false" />
+          <Property Name="Naam" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Logo" Type="image" />
+          <Property Name="Instructie" Type="varchar" MaxLength="255" />
+          <Property Name="Beloning" Type="int" />
+        </EntityType>
+        <EntityType Name="Achievements_Manager">
+          <Key>
+            <PropertyRef Name="ManagerManager_ID" />
+            <PropertyRef Name="AchievementsAchievements_ID" />
+          </Key>
+          <Property Name="ManagerManager_ID" Type="int" Nullable="false" />
+          <Property Name="AchievementsAchievements_ID" Type="int" Nullable="false" />
+          <Property Name="Voortgang" Type="int" />
+          <Property Name="Behaald" Type="bit" />
+        </EntityType>
+        <EntityType Name="Club">
+          <Key>
+            <PropertyRef Name="Club_ID" />
+          </Key>
+          <Property Name="Club_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naam" Type="varchar" MaxLength="255" />
+          <Property Name="Logo" Type="image" />
+          <Property Name="Doelstelling" Type="smallint" />
+          <Property Name="LandLand_Code" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Competitie">
+          <Key>
+            <PropertyRef Name="Competitie_ID" />
+          </Key>
+          <Property Name="Competitie_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naam" Type="varchar" MaxLength="255" />
+          <Property Name="LandLand_Code" Type="int" Nullable="false" />
+          <Property Name="ManagerManagerID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Competitie_Club">
+          <Key>
+            <PropertyRef Name="Competitie_Club_ID" />
+          </Key>
+          <Property Name="Competitie_Club_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClubClub_ID" Type="int" Nullable="false" />
+          <Property Name="CompetitieCompetitie_ID" Type="int" Nullable="false" />
+          <Property Name="Positie" Type="int" />
+        </EntityType>
+        <EntityType Name="Land">
+          <Key>
+            <PropertyRef Name="Land_Code" />
+          </Key>
+          <Property Name="Land_Code" Type="int" Nullable="false" />
+          <Property Name="Naam" Type="varchar" MaxLength="255" />
+          <Property Name="Continent" Type="varchar" MaxLength="255" />
+          <Property Name="Vlag" Type="image" />
+        </EntityType>
+        <EntityType Name="Manager">
+          <Key>
+            <PropertyRef Name="Manager_ID" />
+          </Key>
+          <Property Name="Manager_ID" Type="int" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="255" />
+          <Property Name="Password" Type="varchar" MaxLength="255" />
+          <Property Name="Email_adres" Type="varchar" MaxLength="255" />
+          <Property Name="Geslacht" Type="char" MaxLength="1" />
+          <Property Name="Premium_dagen" Type="int" />
+          <Property Name="Ingeschreven" Type="date" />
+          <Property Name="Laatst_Ingelogd" Type="timestamp" StoreGeneratedPattern="Computed" />
+          <Property Name="Platform" Type="char" MaxLength="2" />
+          <Property Name="Site_Logins" Type="int" />
+          <Property Name="Profiel_Bezoekers" Type="int" />
+          <Property Name="LandLand_Code" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Manager_Competitie">
+          <Key>
+            <PropertyRef Name="Manager_Competitie_ID" />
+          </Key>
+          <Property Name="Manager_Competitie_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompetitieCompetitie_ID" Type="int" Nullable="false" />
+          <Property Name="ClubClub_ID" Type="int" Nullable="false" />
+          <Property Name="ManagerPunten" Type="int" />
+        </EntityType>
+        <EntityType Name="Wedstrijd">
+          <Key>
+            <PropertyRef Name="Wedstrijd_ID" />
+          </Key>
+          <Property Name="Wedstrijd_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ThuisClub_ID" Type="int" Nullable="false" />
+          <Property Name="UitClub_ID" Type="int" Nullable="false" />
+          <Property Name="CompetitieCompetitie_ID" Type="int" Nullable="false" />
+          <Property Name="Thuis_Score" Type="smallint" />
+          <Property Name="Uit_Score" Type="smallint" />
+        </EntityType>
+        <Association Name="FK__Competiti__Compe__4AB81AF0">
+          <End Role="Competitie" Type="Self.Competitie" Multiplicity="1" />
+          <End Role="Competitie_Club" Type="Self.Competitie_Club" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competitie">
+              <PropertyRef Name="Competitie_ID" />
+            </Principal>
+            <Dependent Role="Competitie_Club">
+              <PropertyRef Name="CompetitieCompetitie_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Competiti__Posit__49C3F6B7">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Competitie_Club" Type="Self.Competitie_Club" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Club_ID" />
+            </Principal>
+            <Dependent Role="Competitie_Club">
+              <PropertyRef Name="ClubClub_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Manager__LandLan__4BAC3F29">
+          <End Role="Land" Type="Self.Land" Multiplicity="1" />
+          <End Role="Manager" Type="Self.Manager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Land">
+              <PropertyRef Name="Land_Code" />
+            </Principal>
+            <Dependent Role="Manager">
+              <PropertyRef Name="LandLand_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_AchievementsAchievements_ID">
+          <End Role="Achievements" Type="Self.Achievements" Multiplicity="1" />
+          <End Role="Achievements_Manager" Type="Self.Achievements_Manager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Achievements">
+              <PropertyRef Name="Achievement_ID" />
+            </Principal>
+            <Dependent Role="Achievements_Manager">
+              <PropertyRef Name="AchievementsAchievements_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CompetitieFKInWedstrijd">
+          <End Role="Competitie" Type="Self.Competitie" Multiplicity="1" />
+          <End Role="Wedstrijd" Type="Self.Wedstrijd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competitie">
+              <PropertyRef Name="Competitie_ID" />
+            </Principal>
+            <Dependent Role="Wedstrijd">
+              <PropertyRef Name="CompetitieCompetitie_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_LandCode">
+          <End Role="Land" Type="Self.Land" Multiplicity="1" />
+          <End Role="Club" Type="Self.Club" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Land">
+              <PropertyRef Name="Land_Code" />
+            </Principal>
+            <Dependent Role="Club">
+              <PropertyRef Name="LandLand_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_LandCodeInCompetitie">
+          <End Role="Land" Type="Self.Land" Multiplicity="1" />
+          <End Role="Competitie" Type="Self.Competitie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Land">
+              <PropertyRef Name="Land_Code" />
+            </Principal>
+            <Dependent Role="Competitie">
+              <PropertyRef Name="LandLand_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ManagerFKInAchievements_Manager">
+          <End Role="Manager" Type="Self.Manager" Multiplicity="1" />
+          <End Role="Achievements_Manager" Type="Self.Achievements_Manager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manager">
+              <PropertyRef Name="Manager_ID" />
+            </Principal>
+            <Dependent Role="Achievements_Manager">
+              <PropertyRef Name="ManagerManager_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OSMModelStoreContainer">
+          <EntitySet Name="Achievements" EntityType="Self.Achievements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Achievements_Manager" EntityType="Self.Achievements_Manager" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Club" EntityType="Self.Club" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Competitie" EntityType="Self.Competitie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Competitie_Club" EntityType="Self.Competitie_Club" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Land" EntityType="Self.Land" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Manager" EntityType="Self.Manager" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Manager_Competitie" EntityType="Self.Manager_Competitie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wedstrijd" EntityType="Self.Wedstrijd" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Competiti__Compe__4AB81AF0" Association="Self.FK__Competiti__Compe__4AB81AF0">
+            <End Role="Competitie" EntitySet="Competitie" />
+            <End Role="Competitie_Club" EntitySet="Competitie_Club" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Competiti__Posit__49C3F6B7" Association="Self.FK__Competiti__Posit__49C3F6B7">
+            <End Role="Club" EntitySet="Club" />
+            <End Role="Competitie_Club" EntitySet="Competitie_Club" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Manager__LandLan__4BAC3F29" Association="Self.FK__Manager__LandLan__4BAC3F29">
+            <End Role="Land" EntitySet="Land" />
+            <End Role="Manager" EntitySet="Manager" />
+          </AssociationSet>
+          <AssociationSet Name="fk_AchievementsAchievements_ID" Association="Self.fk_AchievementsAchievements_ID">
+            <End Role="Achievements" EntitySet="Achievements" />
+            <End Role="Achievements_Manager" EntitySet="Achievements_Manager" />
+          </AssociationSet>
+          <AssociationSet Name="fk_CompetitieFKInWedstrijd" Association="Self.fk_CompetitieFKInWedstrijd">
+            <End Role="Competitie" EntitySet="Competitie" />
+            <End Role="Wedstrijd" EntitySet="Wedstrijd" />
+          </AssociationSet>
+          <AssociationSet Name="fk_LandCode" Association="Self.fk_LandCode">
+            <End Role="Land" EntitySet="Land" />
+            <End Role="Club" EntitySet="Club" />
+          </AssociationSet>
+          <AssociationSet Name="fk_LandCodeInCompetitie" Association="Self.fk_LandCodeInCompetitie">
+            <End Role="Land" EntitySet="Land" />
+            <End Role="Competitie" EntitySet="Competitie" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ManagerFKInAchievements_Manager" Association="Self.fk_ManagerFKInAchievements_Manager">
+            <End Role="Manager" EntitySet="Manager" />
+            <End Role="Achievements_Manager" EntitySet="Achievements_Manager" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OSMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Achievement">
+          <Key>
+            <PropertyRef Name="Achievement_ID" />
+          </Key>
+          <Property Name="Achievement_ID" Type="Int32" Nullable="false" />
+          <Property Name="Naam" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Logo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Instructie" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Beloning" Type="Int32" />
+          <NavigationProperty Name="Achievements_Manager" Relationship="Self.fk_AchievementsAchievements_ID" FromRole="Achievements" ToRole="Achievements_Manager" />
+        </EntityType>
+        <EntityType Name="Achievements_Manager">
+          <Key>
+            <PropertyRef Name="ManagerManager_ID" />
+            <PropertyRef Name="AchievementsAchievements_ID" />
+          </Key>
+          <Property Name="ManagerManager_ID" Type="Int32" Nullable="false" />
+          <Property Name="AchievementsAchievements_ID" Type="Int32" Nullable="false" />
+          <Property Name="Voortgang" Type="Int32" />
+          <Property Name="Behaald" Type="Boolean" />
+          <NavigationProperty Name="Achievement" Relationship="Self.fk_AchievementsAchievements_ID" FromRole="Achievements_Manager" ToRole="Achievements" />
+          <NavigationProperty Name="Manager" Relationship="Self.fk_ManagerFKInAchievements_Manager" FromRole="Achievements_Manager" ToRole="Manager" />
+        </EntityType>
+        <EntityType Name="Club">
+          <Key>
+            <PropertyRef Name="Club_ID" />
+          </Key>
+          <Property Name="Club_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naam" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Logo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Doelstelling" Type="Int16" />
+          <Property Name="LandLand_Code" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Competitie_Club" Relationship="Self.FK__Competiti__Posit__49C3F6B7" FromRole="Club" ToRole="Competitie_Club" />
+          <NavigationProperty Name="Land" Relationship="Self.fk_LandCode" FromRole="Club" ToRole="Land" />
+        </EntityType>
+        <EntityType Name="Competitie">
+          <Key>
+            <PropertyRef Name="Competitie_ID" />
+          </Key>
+          <Property Name="Competitie_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naam" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="LandLand_Code" Type="Int32" Nullable="false" />
+          <Property Name="ManagerManagerID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Competitie_Club" Relationship="Self.FK__Competiti__Compe__4AB81AF0" FromRole="Competitie" ToRole="Competitie_Club" />
+          <NavigationProperty Name="Wedstrijds" Relationship="Self.fk_CompetitieFKInWedstrijd" FromRole="Competitie" ToRole="Wedstrijd" />
+          <NavigationProperty Name="Land" Relationship="Self.fk_LandCodeInCompetitie" FromRole="Competitie" ToRole="Land" />
+        </EntityType>
+        <EntityType Name="Competitie_Club">
+          <Key>
+            <PropertyRef Name="Competitie_Club_ID" />
+          </Key>
+          <Property Name="Competitie_Club_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClubClub_ID" Type="Int32" Nullable="false" />
+          <Property Name="CompetitieCompetitie_ID" Type="Int32" Nullable="false" />
+          <Property Name="Positie" Type="Int32" />
+          <NavigationProperty Name="Club" Relationship="Self.FK__Competiti__Posit__49C3F6B7" FromRole="Competitie_Club" ToRole="Club" />
+          <NavigationProperty Name="Competitie" Relationship="Self.FK__Competiti__Compe__4AB81AF0" FromRole="Competitie_Club" ToRole="Competitie" />
+        </EntityType>
+        <EntityType Name="Land">
+          <Key>
+            <PropertyRef Name="Land_Code" />
+          </Key>
+          <Property Name="Land_Code" Type="Int32" Nullable="false" />
+          <Property Name="Naam" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Continent" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Vlag" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Clubs" Relationship="Self.fk_LandCode" FromRole="Land" ToRole="Club" />
+          <NavigationProperty Name="Competities" Relationship="Self.fk_LandCodeInCompetitie" FromRole="Land" ToRole="Competitie" />
+          <NavigationProperty Name="Managers" Relationship="Self.FK__Manager__LandLan__4BAC3F29" FromRole="Land" ToRole="Manager" />
+        </EntityType>
+        <EntityType Name="Manager">
+          <Key>
+            <PropertyRef Name="Manager_ID" />
+          </Key>
+          <Property Name="Manager_ID" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Email_adres" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Geslacht" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Premium_dagen" Type="Int32" />
+          <Property Name="Ingeschreven" Type="DateTime" Precision="0" />
+          <Property Name="Laatst_Ingelogd" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Platform" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="Site_Logins" Type="Int32" />
+          <Property Name="Profiel_Bezoekers" Type="Int32" />
+          <Property Name="LandLand_Code" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Achievements_Manager" Relationship="Self.fk_ManagerFKInAchievements_Manager" FromRole="Manager" ToRole="Achievements_Manager" />
+          <NavigationProperty Name="Land" Relationship="Self.FK__Manager__LandLan__4BAC3F29" FromRole="Manager" ToRole="Land" />
+        </EntityType>
+        <EntityType Name="Manager_Competitie">
+          <Key>
+            <PropertyRef Name="Manager_Competitie_ID" />
+          </Key>
+          <Property Name="Manager_Competitie_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompetitieCompetitie_ID" Type="Int32" Nullable="false" />
+          <Property Name="ClubClub_ID" Type="Int32" Nullable="false" />
+          <Property Name="ManagerPunten" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Wedstrijd">
+          <Key>
+            <PropertyRef Name="Wedstrijd_ID" />
+          </Key>
+          <Property Name="Wedstrijd_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ThuisClub_ID" Type="Int32" Nullable="false" />
+          <Property Name="UitClub_ID" Type="Int32" Nullable="false" />
+          <Property Name="CompetitieCompetitie_ID" Type="Int32" Nullable="false" />
+          <Property Name="Thuis_Score" Type="Int16" />
+          <Property Name="Uit_Score" Type="Int16" />
+          <NavigationProperty Name="Competitie" Relationship="Self.fk_CompetitieFKInWedstrijd" FromRole="Wedstrijd" ToRole="Competitie" />
+        </EntityType>
+        <Association Name="fk_AchievementsAchievements_ID">
+          <End Role="Achievements" Type="Self.Achievement" Multiplicity="1" />
+          <End Role="Achievements_Manager" Type="Self.Achievements_Manager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Achievements">
+              <PropertyRef Name="Achievement_ID" />
+            </Principal>
+            <Dependent Role="Achievements_Manager">
+              <PropertyRef Name="AchievementsAchievements_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ManagerFKInAchievements_Manager">
+          <End Role="Manager" Type="Self.Manager" Multiplicity="1" />
+          <End Role="Achievements_Manager" Type="Self.Achievements_Manager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manager">
+              <PropertyRef Name="Manager_ID" />
+            </Principal>
+            <Dependent Role="Achievements_Manager">
+              <PropertyRef Name="ManagerManager_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Competiti__Posit__49C3F6B7">
+          <End Role="Club" Type="Self.Club" Multiplicity="1" />
+          <End Role="Competitie_Club" Type="Self.Competitie_Club" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="Club_ID" />
+            </Principal>
+            <Dependent Role="Competitie_Club">
+              <PropertyRef Name="ClubClub_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_LandCode">
+          <End Role="Land" Type="Self.Land" Multiplicity="1" />
+          <End Role="Club" Type="Self.Club" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Land">
+              <PropertyRef Name="Land_Code" />
+            </Principal>
+            <Dependent Role="Club">
+              <PropertyRef Name="LandLand_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Competiti__Compe__4AB81AF0">
+          <End Role="Competitie" Type="Self.Competitie" Multiplicity="1" />
+          <End Role="Competitie_Club" Type="Self.Competitie_Club" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competitie">
+              <PropertyRef Name="Competitie_ID" />
+            </Principal>
+            <Dependent Role="Competitie_Club">
+              <PropertyRef Name="CompetitieCompetitie_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CompetitieFKInWedstrijd">
+          <End Role="Competitie" Type="Self.Competitie" Multiplicity="1" />
+          <End Role="Wedstrijd" Type="Self.Wedstrijd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competitie">
+              <PropertyRef Name="Competitie_ID" />
+            </Principal>
+            <Dependent Role="Wedstrijd">
+              <PropertyRef Name="CompetitieCompetitie_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_LandCodeInCompetitie">
+          <End Role="Land" Type="Self.Land" Multiplicity="1" />
+          <End Role="Competitie" Type="Self.Competitie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Land">
+              <PropertyRef Name="Land_Code" />
+            </Principal>
+            <Dependent Role="Competitie">
+              <PropertyRef Name="LandLand_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Manager__LandLan__4BAC3F29">
+          <End Role="Land" Type="Self.Land" Multiplicity="1" />
+          <End Role="Manager" Type="Self.Manager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Land">
+              <PropertyRef Name="Land_Code" />
+            </Principal>
+            <Dependent Role="Manager">
+              <PropertyRef Name="LandLand_Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OSMEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Achievements" EntityType="Self.Achievement" />
+          <EntitySet Name="Achievements_Manager" EntityType="Self.Achievements_Manager" />
+          <EntitySet Name="Clubs" EntityType="Self.Club" />
+          <EntitySet Name="Competities" EntityType="Self.Competitie" />
+          <EntitySet Name="Competitie_Club" EntityType="Self.Competitie_Club" />
+          <EntitySet Name="Lands" EntityType="Self.Land" />
+          <EntitySet Name="Managers" EntityType="Self.Manager" />
+          <EntitySet Name="Manager_Competitie" EntityType="Self.Manager_Competitie" />
+          <EntitySet Name="Wedstrijds" EntityType="Self.Wedstrijd" />
+          <AssociationSet Name="fk_AchievementsAchievements_ID" Association="Self.fk_AchievementsAchievements_ID">
+            <End Role="Achievements" EntitySet="Achievements" />
+            <End Role="Achievements_Manager" EntitySet="Achievements_Manager" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ManagerFKInAchievements_Manager" Association="Self.fk_ManagerFKInAchievements_Manager">
+            <End Role="Manager" EntitySet="Managers" />
+            <End Role="Achievements_Manager" EntitySet="Achievements_Manager" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Competiti__Posit__49C3F6B7" Association="Self.FK__Competiti__Posit__49C3F6B7">
+            <End Role="Club" EntitySet="Clubs" />
+            <End Role="Competitie_Club" EntitySet="Competitie_Club" />
+          </AssociationSet>
+          <AssociationSet Name="fk_LandCode" Association="Self.fk_LandCode">
+            <End Role="Land" EntitySet="Lands" />
+            <End Role="Club" EntitySet="Clubs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Competiti__Compe__4AB81AF0" Association="Self.FK__Competiti__Compe__4AB81AF0">
+            <End Role="Competitie" EntitySet="Competities" />
+            <End Role="Competitie_Club" EntitySet="Competitie_Club" />
+          </AssociationSet>
+          <AssociationSet Name="fk_CompetitieFKInWedstrijd" Association="Self.fk_CompetitieFKInWedstrijd">
+            <End Role="Competitie" EntitySet="Competities" />
+            <End Role="Wedstrijd" EntitySet="Wedstrijds" />
+          </AssociationSet>
+          <AssociationSet Name="fk_LandCodeInCompetitie" Association="Self.fk_LandCodeInCompetitie">
+            <End Role="Land" EntitySet="Lands" />
+            <End Role="Competitie" EntitySet="Competities" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Manager__LandLan__4BAC3F29" Association="Self.FK__Manager__LandLan__4BAC3F29">
+            <End Role="Land" EntitySet="Lands" />
+            <End Role="Manager" EntitySet="Managers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OSMModelStoreContainer" CdmEntityContainer="OSMEntities3">
+          <EntitySetMapping Name="Achievements">
+            <EntityTypeMapping TypeName="OSMModel.Achievement">
+              <MappingFragment StoreEntitySet="Achievements">
+                <ScalarProperty Name="Achievement_ID" ColumnName="Achievement_ID" />
+                <ScalarProperty Name="Naam" ColumnName="Naam" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="Instructie" ColumnName="Instructie" />
+                <ScalarProperty Name="Beloning" ColumnName="Beloning" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Achievements_Manager">
+            <EntityTypeMapping TypeName="OSMModel.Achievements_Manager">
+              <MappingFragment StoreEntitySet="Achievements_Manager">
+                <ScalarProperty Name="ManagerManager_ID" ColumnName="ManagerManager_ID" />
+                <ScalarProperty Name="AchievementsAchievements_ID" ColumnName="AchievementsAchievements_ID" />
+                <ScalarProperty Name="Voortgang" ColumnName="Voortgang" />
+                <ScalarProperty Name="Behaald" ColumnName="Behaald" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clubs">
+            <EntityTypeMapping TypeName="OSMModel.Club">
+              <MappingFragment StoreEntitySet="Club">
+                <ScalarProperty Name="Club_ID" ColumnName="Club_ID" />
+                <ScalarProperty Name="Naam" ColumnName="Naam" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="Doelstelling" ColumnName="Doelstelling" />
+                <ScalarProperty Name="LandLand_Code" ColumnName="LandLand_Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Competities">
+            <EntityTypeMapping TypeName="OSMModel.Competitie">
+              <MappingFragment StoreEntitySet="Competitie">
+                <ScalarProperty Name="Competitie_ID" ColumnName="Competitie_ID" />
+                <ScalarProperty Name="Naam" ColumnName="Naam" />
+                <ScalarProperty Name="LandLand_Code" ColumnName="LandLand_Code" />
+                <ScalarProperty Name="ManagerManagerID" ColumnName="ManagerManagerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Competitie_Club">
+            <EntityTypeMapping TypeName="OSMModel.Competitie_Club">
+              <MappingFragment StoreEntitySet="Competitie_Club">
+                <ScalarProperty Name="Competitie_Club_ID" ColumnName="Competitie_Club_ID" />
+                <ScalarProperty Name="ClubClub_ID" ColumnName="ClubClub_ID" />
+                <ScalarProperty Name="CompetitieCompetitie_ID" ColumnName="CompetitieCompetitie_ID" />
+                <ScalarProperty Name="Positie" ColumnName="Positie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lands">
+            <EntityTypeMapping TypeName="OSMModel.Land">
+              <MappingFragment StoreEntitySet="Land">
+                <ScalarProperty Name="Land_Code" ColumnName="Land_Code" />
+                <ScalarProperty Name="Naam" ColumnName="Naam" />
+                <ScalarProperty Name="Continent" ColumnName="Continent" />
+                <ScalarProperty Name="Vlag" ColumnName="Vlag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Managers">
+            <EntityTypeMapping TypeName="OSMModel.Manager">
+              <MappingFragment StoreEntitySet="Manager">
+                <ScalarProperty Name="Manager_ID" ColumnName="Manager_ID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email_adres" ColumnName="Email_adres" />
+                <ScalarProperty Name="Geslacht" ColumnName="Geslacht" />
+                <ScalarProperty Name="Premium_dagen" ColumnName="Premium_dagen" />
+                <ScalarProperty Name="Ingeschreven" ColumnName="Ingeschreven" />
+                <ScalarProperty Name="Laatst_Ingelogd" ColumnName="Laatst_Ingelogd" />
+                <ScalarProperty Name="Platform" ColumnName="Platform" />
+                <ScalarProperty Name="Site_Logins" ColumnName="Site_Logins" />
+                <ScalarProperty Name="Profiel_Bezoekers" ColumnName="Profiel_Bezoekers" />
+                <ScalarProperty Name="LandLand_Code" ColumnName="LandLand_Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Manager_Competitie">
+            <EntityTypeMapping TypeName="OSMModel.Manager_Competitie">
+              <MappingFragment StoreEntitySet="Manager_Competitie">
+                <ScalarProperty Name="Manager_Competitie_ID" ColumnName="Manager_Competitie_ID" />
+                <ScalarProperty Name="CompetitieCompetitie_ID" ColumnName="CompetitieCompetitie_ID" />
+                <ScalarProperty Name="ClubClub_ID" ColumnName="ClubClub_ID" />
+                <ScalarProperty Name="ManagerPunten" ColumnName="ManagerPunten" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wedstrijds">
+            <EntityTypeMapping TypeName="OSMModel.Wedstrijd">
+              <MappingFragment StoreEntitySet="Wedstrijd">
+                <ScalarProperty Name="Wedstrijd_ID" ColumnName="Wedstrijd_ID" />
+                <ScalarProperty Name="ThuisClub_ID" ColumnName="ThuisClub_ID" />
+                <ScalarProperty Name="UitClub_ID" ColumnName="UitClub_ID" />
+                <ScalarProperty Name="CompetitieCompetitie_ID" ColumnName="CompetitieCompetitie_ID" />
+                <ScalarProperty Name="Thuis_Score" ColumnName="Thuis_Score" />
+                <ScalarProperty Name="Uit_Score" ColumnName="Uit_Score" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

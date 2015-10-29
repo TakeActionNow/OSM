@@ -1,0 +1,27 @@
+﻿CREATE TABLE [callpool].[call_pool] (
+    [call_pool_id]           INT            IDENTITY (1, 1) NOT NULL,
+    [organizational_unit_id] INT            NOT NULL,
+    [contact_id]             INT            NULL,
+    [contract_formation_id]  INT            NULL,
+    [planning_hours_id]      INT            NULL,
+    [occupation_hours_id]    INT            NULL,
+    [call_pool_status_id]    INT            NOT NULL,
+    [call_pool_date]         DATE           NOT NULL,
+    [call_pool_start_time]   TIME (0)       NOT NULL,
+    [call_pool_end_time]     TIME (0)       NOT NULL,
+    [call_pool_reason_id]    INT            NOT NULL,
+    [call_pool_comment]      NVARCHAR (MAX) NULL,
+    [process_date]           DATETIME       NULL,
+    [create_date]            DATETIME       NULL,
+    [modify_date]            DATETIME       NULL,
+    [delete_date]            DATETIME       NULL,
+    PRIMARY KEY CLUSTERED ([call_pool_id] ASC),
+    CONSTRAINT [FK_call_pool_call_pool_reason] FOREIGN KEY ([call_pool_reason_id]) REFERENCES [callpool].[call_pool_reason] ([call_pool_reason_id]),
+    CONSTRAINT [FK_call_pool_call_pool_status] FOREIGN KEY ([call_pool_status_id]) REFERENCES [callpool].[call_pool_status] ([call_pool_status_id]),
+    CONSTRAINT [FK_call_pool_contact] FOREIGN KEY ([contact_id]) REFERENCES [contact].[contact] ([contact_id]),
+    CONSTRAINT [FK_call_pool_contract_formation] FOREIGN KEY ([contract_formation_id]) REFERENCES [contract].[contract_formation] ([contract_formation_id]),
+    CONSTRAINT [FK_call_pool_occupation_hours] FOREIGN KEY ([occupation_hours_id]) REFERENCES [occupancygrid].[occupation_hours] ([occupation_hours_id]),
+    CONSTRAINT [FK_call_pool_organizational_unit] FOREIGN KEY ([organizational_unit_id]) REFERENCES [organisation].[organizational_unit] ([organizational_unit_id]),
+    CONSTRAINT [FK_call_pool_planning_hours] FOREIGN KEY ([planning_hours_id]) REFERENCES [planning].[planning_hours] ([planning_hours_id])
+);
+

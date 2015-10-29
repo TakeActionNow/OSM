@@ -1,0 +1,8 @@
+﻿@model Ronin.ViewModel.LandViewModel
+
+<h1> This is @Model.Naam </h1>
+
+<div class="land">
+   @Html.LabelFor(x => x.Naam, @Model.Naam)
+   @Html.LabelFor(x => x.Continent, @Model.Continent)
+</div>

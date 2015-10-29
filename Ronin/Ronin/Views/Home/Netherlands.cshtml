@@ -1,0 +1,20 @@
+﻿@model Ronin.ViewModel.LandViewModel
+
+<h1> This is @Model.Naam </h1>
+
+<div class="land" height="400px" width="100%">
+    </br>
+    <label>Continent:</label>
+    @Html.LabelFor(x => x.Continent, @Model.Continent, "Continent:")
+    </br>
+    <label>Land:</label>
+    @Html.LabelFor(x => x.Naam, @Model.Naam, "Land:")
+    </br>
+    <label>Competitie naam:</label>
+    @Html.LabelFor(x => x.CompetitieViewModel.Naam, @Model.CompetitieViewModel.Naam, "Competitienaam:")
+    </br>
+    <label> Manager punten:</label>
+    @Html.LabelFor(x => x.CompetitieViewModel.ManagerPunten, @Model.CompetitieViewModel.ManagerPunten.ToString(), "Manager punten in land:")
+    </br>
+
+</div>
